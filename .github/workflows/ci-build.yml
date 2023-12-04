@@ -1,0 +1,18 @@
+
+name: CI Build
+on:
+  - pull_request
+  - push
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@4
+      - name: Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
+      - name: Build
+        run: make VERBOSE=1
+      - name: Test
+        run: dummy_tests --verbose
+        #run: make VERBOSE=1 ARGS=--verbose test
