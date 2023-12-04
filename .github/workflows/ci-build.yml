@@ -14,5 +14,5 @@ jobs:
       - name: Build
         run: make VERBOSE=1
       - name: Test
-        run: dummy_tests --verbose
+        run: ./dummy_tests --verbose
         #run: make VERBOSE=1 ARGS=--verbose test
