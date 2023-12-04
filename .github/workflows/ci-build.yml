@@ -49,7 +49,7 @@ jobs:
       - uses: msys2/setup-msys2@v2
     defaults:
       run:
-        shell: msys2 {0}    # Make MSYS2 the default shell
+        shell: msys2 {0}
     steps:
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
