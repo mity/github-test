@@ -50,12 +50,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: msys2/setup-msys2@v2
+        with:
+          install: cmake ninja
       - name: Configure
-        run: |
-          pacman -S cmake
-          cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Ninja'
       - name: Build
-        run: make VERBOSE=1
+        run: ninja VERBOSE=1
       - name: Test
         run: ./dummy_tests --verbose
-        #run: make VERBOSE=1 ARGS=--verbose test
+        #run: ninja VERBOSE=1 ARGS=--verbose test
