@@ -44,13 +44,12 @@ jobs:
 
   windows-msys2:
     runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: msys2/setup-msys2@v2
     defaults:
       run:
         shell: msys2 {0}
     steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
       - name: Build
