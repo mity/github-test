@@ -55,7 +55,7 @@ jobs:
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Ninja' .
       - name: Build
-        run: ninja VERBOSE=1
+        run: ninja -v
       - name: Test
         run: ./dummy_tests --verbose
         #run: ninja VERBOSE=1 ARGS=--verbose test
