@@ -5,10 +5,52 @@ on:
   - push
 
 jobs:
+
   linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
+      - name: Build
+        run: make VERBOSE=1
+      - name: Test
+        run: ./dummy_tests --verbose
+        #run: make VERBOSE=1 ARGS=--verbose test
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
+      - name: Build
+        run: make VERBOSE=1
+      - name: Test
+        run: ./dummy_tests --verbose
+        #run: make VERBOSE=1 ARGS=--verbose test
+
+  windows-msvc:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v1.3.1
+      - name: Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 16 2019" -A x64
+      - name: Build
+        run: msbuild.exe github-test.sln /p:Configuration=Debug /p:Platform=x64
+      - name: Test
+        run: Debug\dummy_tests.exe
+
+  windows-msys2:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+    defaults:
+      run:
+        shell: msys2 {0}    # Make MSYS2 the default shell
+    steps:
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles'
       - name: Build
