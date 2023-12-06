@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Dump github context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles' .
       - name: Build

@@ -1,5 +1,5 @@
 
-[![Build Status](https://github.com/mity/github-test/actions/workflows/ci-build.yml/badge.svg?branch=master)](https://github.com/mity/github-test/actions/workflows/ci-build.yml)
+[![Build Status](https://github.com/mity/github-test/actions/workflows/ci-build.yml/badge.svg)](https://github.com/mity/github-test/actions/workflows/ci-build.yml)
 
 # GitHub-test
 
