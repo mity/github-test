@@ -5,15 +5,37 @@ on:
   - push
 
 jobs:
-
-  linux:
+  dump-context:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - name: Dump github context
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G 'Unix Makefiles' .
       - name: Build
@@ -42,7 +64,7 @@ jobs:
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 17 2022" -A x64 .
       - name: Build
-        run: msbuild.exe github-test.sln /p:Configuration=Debug /p:Platform=x64
+        run: msbuild.exe ${{ event.repository.name }}.sln /p:Configuration=Debug /p:Platform=x64
       - name: Test
         run: Debug\dummy_tests.exe
 
