@@ -32,6 +32,8 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+      - name: Exoeriment
+        run: echo ${{ github.event.repository.name }}
 
   linux:
     runs-on: ubuntu-latest
