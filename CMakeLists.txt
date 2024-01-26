@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 project(github-test C)
 
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
