@@ -1,3 +1,6 @@
+---
+var: value
+---
 
 # GitHub-test
 
